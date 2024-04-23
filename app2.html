@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let users = [
+            { name: 'Per', status: 'hurra for meg' },
+            { name: 'Pål', status: 'full fart' },
+            { name: 'Espen', status: 'pizzatid' },
+            { name: 'Terje', status: 'coding is life' },
+        ];
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <ul>
+                    ${createUserList()}
+                </ul>                
+            `;
+        }
+
+        function createUserList() {
+            let html = '';
+            for (let i = 0; i < users.length; i++) {
+                let user = users[i];
+                html += /*HTML*/`<li>${user.name} - <i>${user.status}</i></li>`;
+            }
+            return html;
+        }
+
+        // controller
+
+    </script>
+</body>
+
+</html>

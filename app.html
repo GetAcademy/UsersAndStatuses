@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let users = ['Per', 'Pål', 'Espen', 'Terje'];
+        let statuses = ['hurra for meg', 'full fart', 'pizzatid', 'coding is life'];
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <ul>
+                ${createUserList()}
+            </ul>                
+                `;
+        }
+
+        function createUserList() {
+            let html = '';
+            for (let i = 0; i < users.length; i++) {
+                let user = users[i];
+                let status = statuses[i];
+                html += /*HTML*/`<li>${user} - <i>${status}</i></li>`;
+            }
+            return html;
+        }
+
+
+        // for(let user of users) {
+        //     html += /*HTML*/`<li>${user}</li>`;
+        // }
+
+        // ${createUserList()}
+
+        // function rubenSinFunksjon(){
+        //     return '<li>Ruben</li>';
+        // }
+
+        /*
+            Return gjør to ting: 
+             1: avslutter funksjonen den er i
+             2: 
+        */
+
+
+        // controller
+
+    </script>
+</body>
+
+</html>
