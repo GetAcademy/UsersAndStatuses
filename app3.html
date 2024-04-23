@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        /*
+          1: Lagre i modellen hvem som er logget inn, feks Per
+          2: Man skal kunne endre sin egen status, dvs. den som er logget inn
+          3: knapp for å endre, knapp for lagre og avbryt
+        */
+
+        // let loggedInUser = 'Per';
+        // let users = [
+        //     { name: 'Per', status: 'hurra for meg' },
+        //     { name: 'Pål', status: 'full fart' },
+        //     { name: 'Espen', status: 'pizzatid' },
+        //     { name: 'Terje', status: 'coding is life' },
+        // ];
+
+        // model
+        const model = {
+            loggedInUser: 'Terje',
+            users: [
+                { name: 'Per', status: 'hurra for meg' },
+                { name: 'Pål', status: 'full fart' },
+                { name: 'Espen', status: 'pizzatid' },
+                { name: 'Terje', status: 'coding is life' },
+            ]
+        };
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <ul>
+                    ${createUserList()}
+                </ul>                
+            `;
+        }
+
+        function createUserList() {
+            let html = '';
+            const users = model.users;
+            for (let i = 0; i < users.length; i++) {
+                let user = users[i];
+                let content;
+                if (model.loggedInUser == user.name) {
+                    content = `<input type="text" value="${user.status}"/>`;
+                } else {
+                    content = `<i>${user.status}</i>`;
+                }
+                html += /*HTML*/`
+                    <li>
+                        ${user.name} - 
+                        ${content}             
+                    </li>
+                `;
+            }
+            return html;
+        }
+
+        // controller
+
+    </script>
+</body>
+
+</html>

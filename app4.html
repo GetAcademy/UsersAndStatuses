@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        /*
+          1: Lagre i modellen hvem som er logget inn, feks Per
+          2: Man skal kunne endre sin egen status, dvs. den som er logget inn
+          3: knapp for å endre, knapp for lagre og avbryt
+        */
+
+        // let loggedInUser = 'Per';
+        // let users = [
+        //     { name: 'Per', status: 'hurra for meg' },
+        //     { name: 'Pål', status: 'full fart' },
+        //     { name: 'Espen', status: 'pizzatid' },
+        //     { name: 'Terje', status: 'coding is life' },
+        // ];
+
+        // model
+        const model = {
+            loggedInUser: 'Terje',
+            newStatus: '',
+            isEditing: false,
+            users: [
+                { name: 'Per', status: 'hurra for meg' },
+                { name: 'Pål', status: 'full fart' },
+                { name: 'Espen', status: 'pizzatid' },
+                { name: 'Terje', status: 'coding is life' },
+            ]
+        };
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <ul>
+                    ${createUserList()}
+                </ul>                
+            `;
+        }
+
+        function createUserList() {
+            let html = '';
+            const users = model.users;
+            for (let i = 0; i < users.length; i++) {
+                let user = users[i];
+                let content = `<i>${user.status}</i> `;
+                if (model.loggedInUser == user.name) {
+                    if (model.isEditing) {
+                        content = /*HTML*/`
+                            <input 
+                                type="text" 
+                                value="${user.status}"
+                                oninput="model.newStatus=this.value"
+                                />
+                            <button onclick="save()">lagre</button>
+                            <button onclick="edit(false)">avbryt</button>
+                            `;
+                    } else {
+                        content += '<button onclick="edit(true)">endre</button>';
+                    }
+                }
+                html += /*HTML*/`
+                    <li>
+                        ${user.name} - 
+                        ${content}             
+                    </li>
+                `;
+            }
+            return html;
+        }
+
+        // controller
+        function save(){
+            // finne logget inn bruker sitt objekt
+            let loggedInUser;
+            const users = model.users;
+            for (let i = 0; i < users.length; i++) {
+                let user = users[i];
+                if (model.loggedInUser == user.name) {
+                    loggedInUser = user;
+                }
+            }
+            // endre
+            loggedInUser.status = model.newStatus;
+            edit(false);
+        }
+
+        function edit(status) {
+            model.isEditing = status;
+            updateView();
+        }
+    </script>
+</body>
+
+</html>
